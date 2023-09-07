@@ -1,3 +1,7 @@
+<?php
+
+use Core\Session\Session; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,13 +19,16 @@
         <a href="/"><img src="/images/logo_airbnb.png" alt="airbnb logo"></a>
         <div class="menu-burger-container" id="menu-burger-container">
             <i class="bi bi-list" style="font-size: 18px;"></i>
-            <div class="avatar-container"></div>
+            <div class="avatar-container">
+                <?php if (Session::get(Session::USER)->photo_user) : ?>
+                    <img src="/public/images/avatars/" alt="">
+                <?php endif; ?>
+            </div>
         </div>
         <div id="menu-items-container" class="shadow bg-body-tertiary rounded">
             <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/trips">Trips</a></li>' : ""; ?>
-            <!-- <li class="menu-item">Wishlist</li> -->
-            <!-- <li class="menu-item">Airbnb your home</li> -->
-            <!-- <li class="menu-item">Airbnb your home</li> -->
+            <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/wishlist">Wishlist</a></li>' : ""; ?>
+            <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/airbnb-your-home"><i class="bi bi-house-heart"></i> Airbnb your home</a></li>' : ""; ?>
             <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/logout">Log Out</a></li>' : ""; ?>
             <?php echo $auth::isAuth() ? "" : '<li class="menu-item" id="login-button"><a class="menu-link" href="/login">Log in</a></li>'; ?>
             <?php echo $auth::isAuth() ? "" : '<li class="menu-item"><a class="menu-link" href="/signup">Sign up</a></li>'; ?>

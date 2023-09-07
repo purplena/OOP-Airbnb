@@ -97,6 +97,7 @@ class AuthController extends Controller
         ) {
             $form_result->addError(new FormError('The image format is not valid'));
         } else if (
+            //here I check that all fields are filled in
             empty($post_data['first_name']) ||
             empty($post_data['second_name']) ||
             empty($post_data['email']) ||
@@ -104,7 +105,10 @@ class AuthController extends Controller
         ) {
             $form_result->addError(new FormError('Please fill in all the information'));
         } else if (!filter_var($post_data['email'], FILTER_VALIDATE_EMAIL)) {
+            //here I check email 
             $form_result->addError(new FormError('Your email is not valid'));
+        } else if (AppRepoManager::getRm()->getUserRepo()->checkIfUserExists($post_data['email'])) {
+            $form_result->addError(new FormError('This email already exists'));
         } else {
             $first_name = htmlspecialchars((trim($post_data['first_name'])));
             $second_name = htmlspecialchars((trim($post_data['second_name'])));
@@ -112,7 +116,7 @@ class AuthController extends Controller
             $password = trim(self::hash($post_data['password']));
             $imgTmpPath = $image_data['tmp_name'];
             $filename = uniqid() . '_' . $image_data['name'];
-            $imgPathPublic = PATH_ROOT . '/public/images/' . $filename;
+            $imgPathPublic = PATH_ROOT . '/public/images/avatars/' . $filename;
             $data = [
                 'first_name' => $first_name,
                 'second_name' => $second_name,
@@ -122,7 +126,7 @@ class AuthController extends Controller
             ];
 
             if (move_uploaded_file($imgTmpPath, $imgPathPublic)) {
-                $user = AppRepoManager::getRm()->getUserRepo()->addNewUser($data);
+                AppRepoManager::getRm()->getUserRepo()->addNewUser($data);
             } else {
                 $form_result->addError(new FormError('Error! Try again later!'));
             }
@@ -133,7 +137,7 @@ class AuthController extends Controller
             Session::set(Session::FORM_RESULT, $form_result);
             self::redirect('/signup');
         }
-
+        $user = AppRepoManager::getRm()->getUserRepo()->checkAuth($email, $password);
         //no errors _ back to home page
         Session::set(Session::USER, $user);
         Session::remove(Session::FORM_RESULT);

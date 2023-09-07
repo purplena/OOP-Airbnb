@@ -38,6 +38,30 @@ class UserRepository extends Repository
         return empty($user_data) ? null : new User($user_data);
     }
 
+    public function checkIfUserExists(string $email): bool
+    {
+        $query = sprintf(
+            '
+            SELECT 
+                * 
+            FROM 
+                %s 
+            WHERE 
+                email = :email',
+            $this->getTableName()
+        );
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'email' => $email,
+        ]);
+        $user_data = $stmt->fetch();
+        if ($user_data) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function addNewUser(array $data): bool
     {
         $query = sprintf(

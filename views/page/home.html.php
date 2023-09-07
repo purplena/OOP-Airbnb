@@ -9,8 +9,8 @@
         use App\Model\User;
 
         var_dump($auth::isAuth());
-        var_dump(Session::get(Session::USER));
-        var_dump($_SESSION);;
+        var_dump(Session::get(Session::USER)->photo_user);
+
 
 
         ?>
