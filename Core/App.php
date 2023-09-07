@@ -2,11 +2,13 @@
 
 namespace Core;
 
-use App\Controller\JeuController;
-use MiladRahimi\PhpRouter\Router;
+
+use App\Controller\AuthController;
+use App\Controller\PageController;
 use Core\Database\DatabaseConfigInterface;
-use MiladRahimi\PhpRouter\Exceptions\RouteNotFoundException;
 use MiladRahimi\PhpRouter\Exceptions\InvalidCallableException;
+use MiladRahimi\PhpRouter\Exceptions\RouteNotFoundException;
+use MiladRahimi\PhpRouter\Router;
 
 class App implements DatabaseConfigInterface
 {
@@ -60,20 +62,19 @@ class App implements DatabaseConfigInterface
     //2: méthode registerRoutes (enregistrer des routes)
     private function registerRoutes(): void
     {
-        //on crée la route pour la page d'accueil 
-        // $this->router->get('/', function() {
-        //     echo "Utiliser le controlleur pour envoyer la vue";
-        // });
-
         //déclaration des patterns pour tester les valeurs des arguments
         $this->router->pattern('id', '[0-9]\d*');
         $this->router->pattern('slug', '(\d+-)?[a-z]+(-[a-z-\d]+)*');
 
-        //on crée la route pour la page d'accueil 
-        $this->router->get('/', function () {
-            echo "hello world";
-        });
-        $this->router->get('/jeu/{id}', [JeuController::class, 'detail']);
+        //Home Page 
+        $this->router->get('/', [PageController::class, 'index']);
+        //SignUp
+        $this->router->get('/signup', [AuthController::class, 'signup']);
+        $this->router->post('/signUpPost', [AuthController::class, 'signUpPost']);
+        $this->router->get('/login', [AuthController::class, 'login']);
+        $this->router->post('/loginPost', [AuthController::class, 'loginPost']);
+        //log out
+        $this->router->get('/logout', [AuthController::class, 'logout']);
     }
 
     //3: methode startRouter (démarrage du router)

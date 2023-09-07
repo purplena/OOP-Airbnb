@@ -14,3 +14,107 @@ a {
   text-decoration: none;
   color: inherit;
 }
+a:hover {
+  color: inherit;
+}
+
+body {
+  background: #fefefe;
+}
+
+.page-container {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* HOME PAGE */
+
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-burger-container {
+  padding: 5px 12px;
+  border: 1px solid rgb(187, 186, 186);
+  border-radius: 21px;
+  width: 77px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+  position: relative;
+}
+.menu-burger-container:hover {
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-container {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+#menu-items-container {
+  background-color: #fefefe;
+  width: 240px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: left;
+  border-radius: 21px;
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  display: none;
+}
+#menu-items-container.show {
+  display: block;
+}
+
+.menu-item {
+  
+}
+
+.menu-item:hover {
+  background: rgb(238, 236, 236);
+  color: black;
+}
+
+.menu-link {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* The modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+/* End of Modal */
+/* _______________________________________________________________________________________________ */
+
+/* 

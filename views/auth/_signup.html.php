@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="page-container">
+        <nav id="navbar">
+            <a href="/"><img src="/images/logo_airbnb.png" alt="airbnb logo"></a>
+            <div class="menu-burger-container" id="menu-burger-container">
+                <i class="bi bi-list" style="font-size: 18px;"></i>
+                <div class="avatar-container"></div>
+            </div>
+            <div id="menu-items-container" class="shadow bg-body-tertiary rounded">
+                <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/trips">Trips</a></li>' : ""; ?>
+                <!-- <li class="menu-item">Wishlist</li> -->
+                <!-- <li class="menu-item">Airbnb your home</li> -->
+                <!-- <li class="menu-item">Airbnb your home</li> -->
+                <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/logout">Log Out</a></li>' : ""; ?>
+                <?php echo $auth::isAuth() ? "" : '<li class="menu-item" id="login-button"><a class="menu-link" href="/login">Log in</a></li>'; ?>
+                <?php echo $auth::isAuth() ? "" : '<li class="menu-item"><a class="menu-link" href="/signup">Sign up</a></li>'; ?>
+            </div>
+        </nav>
+
+        <section>
+
+            <h1><?php echo $h1_tag; ?></h1>
+            <?php if ($form_result && $form_result->hasError()) : ?>
+                <div>
+                    <?php echo $form_result->getErrors()[0]->getMessage(); ?>
+                </div>
+            <?php endif; ?>
+
+            <form method=post action="/signUpPost" class="row g-3" enctype="multipart/form-data">
+                <div class="col-md-6">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input type="text" name="first_name" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="second_name" class="form-label">Second Name</label>
+                    <input type="text" name="second_name" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Avatar</label>
+                    <input type="file" name="image">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </section>
+
+        <footer>
+            <script src="/script.js"></script>
+        </footer>
+
+    </div>
+</body>
+
+</html>
