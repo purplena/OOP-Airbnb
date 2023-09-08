@@ -54,12 +54,20 @@ body {
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
 }
 
-.avatar-container {
+/* User image */
+
+.user-image {
+  height: 30px;
+  width: 30px;
+}
+
+.no-user-image {
   height: 30px;
   width: 30px;
   border-radius: 50%;
   background-color: grey;
 }
+/* end user image */
 
 #menu-items-container {
   background-color: #fefefe;
@@ -77,10 +85,6 @@ body {
   display: block;
 }
 
-.menu-item {
-  
-}
-
 .menu-item:hover {
   background: rgb(238, 236, 236);
   color: black;
@@ -93,28 +97,28 @@ body {
   cursor: pointer;
 }
 
-/* The modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+/* PAGE _ ADD NEWW ESTATE */
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
 }
-
-/* Modal content */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+.custom-file-input::before {
+  content: 'Select your images';
+  /* display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700; */
+  /* font-size: 10pt; */
 }
-/* End of Modal */
-/* _______________________________________________________________________________________________ */
-
-/* 
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}

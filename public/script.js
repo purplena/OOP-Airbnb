@@ -12,52 +12,46 @@ document.addEventListener('click', function () {
   menuItemnsContainer.classList.remove('show');
 });
 
-//MODAL LOGIN
+//Code for autocomplete of City and Country
+fetch(
+  'https://raw.githubusercontent.com/russ666/all-countries-and-cities-json/master/countries.json'
+)
+  .then((response) => response.json())
+  .then((data) => {
+    let countries = Object.keys(data);
+    // console.log(countries);
+    const inputCountry = document.getElementById('inputCountry');
+    new Awesomplete(inputCountry, {
+      list: countries,
+    });
 
-const btn = document.getElementById('login-button');
-// const modalPanel = document.getElementById('modal-panel');
+    const inputCity = document.getElementById('inputCity');
+    const cities = Object.values(data).flat();
 
-// btn.addEventListener('click', function () {
-//   console.log('here');
-//   modalPanel.classList.remove('modal-hidden');
-// });
+    const uniqueCities = [];
+    const history = {};
+    for (let i = 0; i < cities.length; i++) {
+      const city = cities[i];
+      if (!history[city]) {
+        uniqueCities.push(city);
+        history[city] = true;
+      }
+    }
+    new Awesomplete(inputCity, {
+      list: uniqueCities,
+    });
+  })
+  .catch((error) => console.error('Error:', error));
 
-// modalButton = document.getElementById('btn-modal-modal');
-// modalButton.addEventListener('click', function () {
-//   modalPanel.classList.add('modal-hidden');
-// });
+//Test for multiple images download
+// Get a reference to the file input element
+const inputElement = document.getElementById('fileInputFilepond');
 
-var modal = document.getElementById('loginModal');
+// Create a FilePond instance
+const pond = FilePond.create(inputElement);
 
-// Get the button that opens the modal
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName('close-button')[0];
-
-// When the user clicks the button, open the modal
-btn.onclick = function () {
-  modal.style.display = 'block';
-};
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-  modal.style.display = 'none';
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = 'none';
-  }
-};
-
-$('#ajaxform').submit(function (e) {
-  e.preventDefault(); // avoid to execute the actual submit of the form.
-  var formData = $(this).serialize();
-
-  $.ajax({
-    type: 'POST',
-    url: '/loginPost',
-    data: $('#ajaxform').serialize(), // serializes the form's elements.
-  });
+pond.setOptions({
+  server: {
+    url: '/addNewEstatePost',
+  },
 });

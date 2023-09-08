@@ -8,8 +8,8 @@
         use Core\Session\Session;
         use App\Model\User;
 
-        var_dump($auth::isAuth());
-        var_dump(Session::get(Session::USER)->photo_user);
+        // var_dump($auth::isAuth());
+        // var_dump(Session::get(Session::USER)->photo_user);
 
 
 

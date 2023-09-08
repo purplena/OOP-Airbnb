@@ -71,10 +71,14 @@ class App implements DatabaseConfigInterface
         //SignUp
         $this->router->get('/signup', [AuthController::class, 'signup']);
         $this->router->post('/signUpPost', [AuthController::class, 'signUpPost']);
+        //Sign in
         $this->router->get('/login', [AuthController::class, 'login']);
         $this->router->post('/loginPost', [AuthController::class, 'loginPost']);
         //log out
         $this->router->get('/logout', [AuthController::class, 'logout']);
+        //Page to add a new appartment
+        $this->router->get('/airbnb-your-home', [PageController::class, 'addNewEstateView']);
+        $this->router->post('/addNewEstatePost', [PageController::class, 'addNewEstatePost']);
     }
 
     //3: methode startRouter (démarrage du router)

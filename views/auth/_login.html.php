@@ -1,3 +1,7 @@
+<?php
+
+use Core\Session\Session; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,52 +15,60 @@
 </head>
 
 <body>
-    <div class="page-container">
-        <nav id="navbar">
-            <a href="/"><img src="/images/logo_airbnb.png" alt="airbnb logo"></a>
-            <div class="menu-burger-container" id="menu-burger-container">
-                <i class="bi bi-list" style="font-size: 18px;"></i>
-                <div class="avatar-container"></div>
+    <nav id="navbar">
+        <a href="/"><img src="/images/logo_airbnb.png" alt="airbnb logo"></a>
+        <div class="menu-burger-container" id="menu-burger-container">
+            <i class="bi bi-list" style="font-size: 18px;"></i>
+            <div class="avatar-container">
+                <?php if ($auth::isAuth()) :  ?>
+                    <?php $avatar = Session::get(Session::USER)->photo_user; ?>
+                    <?php if ($avatar) : ?>
+                        <img class="user-image" src="/images/avatars/<?php echo $avatar; ?>" alt="user avatar">
+                    <?php endif; ?>
+                <?php else : ?>
+                    <div class="no-user-image"></div>
+                <?php endif; ?>
             </div>
-            <div id="menu-items-container" class="shadow bg-body-tertiary rounded">
-                <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/trips">Trips</a></li>' : ""; ?>
-                <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/wishlist">Wishlist</a></li>' : ""; ?>
-                <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/airbnb-your-home"><i class="bi bi-house-heart"></i> Airbnb your home</a></li>' : ""; ?>
-                <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/logout">Log Out</a></li>' : ""; ?>
-                <?php echo $auth::isAuth() ? "" : '<li class="menu-item" id="login-button"><a class="menu-link" href="/login">Log in</a></li>'; ?>
-                <?php echo $auth::isAuth() ? "" : '<li class="menu-item"><a class="menu-link" href="/signup">Sign up</a></li>'; ?>
+        </div>
+        <div id="menu-items-container" class="shadow bg-body-tertiary rounded">
+            <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/trips">Trips</a></li>' : ""; ?>
+            <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/wishlist">Wishlist</a></li>' : ""; ?>
+            <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/airbnb-your-home"><i class="bi bi-house-heart"></i> Airbnb your home</a></li>' : ""; ?>
+            <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/logout">Log Out</a></li>' : ""; ?>
+            <?php echo $auth::isAuth() ? "" : '<li class="menu-item" id="login-button"><a class="menu-link" href="/login">Log in</a></li>'; ?>
+            <?php echo $auth::isAuth() ? "" : '<li class="menu-item"><a class="menu-link" href="/signup">Sign up</a></li>'; ?>
+        </div>
+    </nav>
+
+    <section>
+        <h1><?php echo $h1_tag; ?></h1>
+
+
+        <?php if ($form_result && $form_result->hasError()) : ?>
+            <div>
+                <?php echo $form_result->getErrors()[0]->getMessage(); ?>
             </div>
-        </nav>
+        <?php endif; ?>
 
-        <section>
-            <h1><?php echo $h1_tag; ?></h1>
+        <form method=post action="/loginPost" class="row g-3">
 
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="inputEmail4">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
+        </form>
+    </section>
 
-            <?php if ($form_result && $form_result->hasError()) : ?>
-                <div>
-                    <?php echo $form_result->getErrors()[0]->getMessage(); ?>
-                </div>
-            <?php endif; ?>
-
-            <form method=post action="/loginPost" class="row g-3">
-
-                <div class="col-md-6">
-                    <label for="inputEmail4" class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" id="inputEmail4">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="inputPassword4">
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-            </form>
-        </section>
-
-        <footer>
-            <script src="/script.js"></script>
-        </footer>
+    <footer>
+        <script src="/script.js"></script>
+    </footer>
     </div>
 </body>
 
