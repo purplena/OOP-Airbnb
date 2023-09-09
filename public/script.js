@@ -13,9 +13,7 @@ document.addEventListener('click', function () {
 });
 
 //Code for autocomplete of City and Country
-fetch(
-  'https://raw.githubusercontent.com/russ666/all-countries-and-cities-json/master/countries.json'
-)
+fetch('countries.json')
   .then((response) => response.json())
   .then((data) => {
     let countries = Object.keys(data);
@@ -42,16 +40,3 @@ fetch(
     });
   })
   .catch((error) => console.error('Error:', error));
-
-//Test for multiple images download
-// Get a reference to the file input element
-const inputElement = document.getElementById('fileInputFilepond');
-
-// Create a FilePond instance
-const pond = FilePond.create(inputElement);
-
-pond.setOptions({
-  server: {
-    url: '/addNewEstatePost',
-  },
-});

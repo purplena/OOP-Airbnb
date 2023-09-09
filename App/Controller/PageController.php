@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Core\Controller\Controller;
 use Core\Form\FormResult;
+use Core\Repository\AppRepoManager;
 use Core\View\View;
 use Laminas\Diactoros\ServerRequest;
 use Laminas\Diactoros\UploadedFile;
@@ -27,8 +28,8 @@ class PageController extends Controller
         $view_data = [
             'title_tag' => 'Airbnb',
             'h1_tag' => 'Add new Estate',
-
-
+            'types_estate' => AppRepoManager::getRm()->getTypeEstateRepo()->findAllTypesEstate(),
+            'allEquipment' => AppRepoManager::getRm()->getEquipmentRepo()->findAllEquipment(),
         ];
         $view = new View('page/add_new_estate');
         $view->render($view_data);
@@ -41,11 +42,6 @@ class PageController extends Controller
         $form_result = new FormResult();
 
         var_dump($_FILES['files']);
-        die;
-        $response = "";
-        if (isset($_FILES['files'])) {
-            if ($_FILES['file']['name'][0] == "") {
-            }
-        }
+        var_dump($_POST);
     }
 }
