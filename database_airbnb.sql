@@ -80,6 +80,8 @@ CREATE TABLE IF NOT EXISTS `estate` (
 
 alter table `estate` modify `allowed_animals` int(3);
 
+ALTER TABLE `estate` MODIFY `description` TEXT;
+
 
 CREATE TABLE IF NOT EXISTS `photo_estate` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,

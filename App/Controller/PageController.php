@@ -18,8 +18,7 @@ class PageController extends Controller
         $view_data = [
             'title_tag' => 'Airbnb',
             'h1_tag' => 'Home page',
-
-
+            'estates' => AppRepoManager::getRm()->getEstateRepo()->findAllEstates()
         ];
         $view = new View('page/home');
         $view->render($view_data);

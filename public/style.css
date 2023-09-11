@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+h3 {
+  font-size: 16px;
+}
+
 ul,
 ol,
 li {
@@ -80,6 +84,7 @@ body {
   top: 60px;
   right: 40px;
   display: none;
+  z-index: 10;
 }
 #menu-items-container.show {
   display: block;
@@ -121,4 +126,18 @@ body {
 }
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+/* HOME PAGE */
+.card-custom {
+  border: transparent;
+}
+.card-body {
+  padding: 16px 16px 16px 0;
+}
+
+.home-section-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
 }

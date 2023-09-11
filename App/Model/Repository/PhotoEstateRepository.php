@@ -2,6 +2,9 @@
 
 namespace App\Model\Repository;
 
+use App\Model\Estate;
+use App\Model\PhotoEstate;
+use Core\Repository\AppRepoManager;
 use Core\Repository\Repository;
 
 class PhotoEstateRepository extends Repository
@@ -26,5 +29,27 @@ class PhotoEstateRepository extends Repository
         $stmt->execute($data);
 
         return true;
+    }
+
+    public function findAllPhotosByEstateId(int $estate_id): ?array
+    {
+        $query = sprintf(
+            '
+            SELECT *  
+            FROM `%s`
+            WHERE estate_id = :estate_id
+            ',
+            $this->getTableName()
+        );
+
+        $stmt = $this->pdo->prepare($query);
+        if (!$stmt) return null;
+        $stmt->execute(['estate_id' => $estate_id]);
+        $result = [];
+        while ($row_data = $stmt->fetch()) {
+            $result[] = $row_data['photo_estate_path'];
+        }
+
+        return $result;
     }
 }

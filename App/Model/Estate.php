@@ -18,6 +18,8 @@ class Estate extends Model
     public string $country;
     public int $allowed_animals;
 
+    public array $photos;
+
 
     public ?User $user = null;
     public ?TypeEstate $typeEstate = null;

@@ -3,6 +3,8 @@
 namespace App\Model\Repository;
 
 use App\Model\Estate;
+use App\Model\PhotoEstate;
+use Core\Repository\AppRepoManager;
 use Core\Repository\Repository;
 
 class EstateRepository extends Repository
@@ -29,7 +31,7 @@ class EstateRepository extends Repository
         return true;
     }
 
-    public function findMaxEstateId()
+    public function findMaxEstateId(): ?int
     {
         $result = "";
         $query = sprintf(
@@ -45,5 +47,28 @@ class EstateRepository extends Repository
         $result = $stmt_brand->fetch()['MAX(Id)'];
 
         return $result;
+    }
+
+    public function findAllEstates(): ?array
+    {
+
+        $arr_result = [];
+        $query = sprintf(
+            '
+            SELECT `%1$s`.*
+            FROM `%s`',
+            $this->getTableName()
+        );
+
+        $stmt = $this->pdo->query($query);
+        if (!$stmt) return null;
+
+        while ($row_data = $stmt->fetch()) {
+            $estate = new Estate($row_data);
+            $estate->photos = AppRepoManager::getRm()->getPhotoEstateRepo()->findAllPhotosByEstateId($row_data['id']);
+            $arr_result[] = $estate;
+        }
+
+        return $arr_result;
     }
 }
