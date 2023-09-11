@@ -121,33 +121,39 @@ class PageController extends Controller
             AppRepoManager::getRm()->getEstateEquipmentRepo()->insertEstateEquipmentRow($data);
         }
 
-
         $imageTmpPaths = [];
         foreach ($image_data['tmp_name'] as $key => $value) {
-            // $imgTmpPath = $value;
             $imageTmpPaths[] = $value;
         }
-
         $fileNames = [];
         foreach ($image_data['name'] as $key => $value) {
-            // $filename = uniqid() . '_' . $value;
             $fileNames[] = uniqid() . '_' . $value;
         }
 
+        // Here I reconstruct my two arrays into $key=>$value pairs
+        //Example
+        // array (size=2)
+        // '/tmp/phpvZ87Iz' => string '64fed393acec0_image1.jpg' (length=24)
+        // '/tmp/phpO7yhJz' => string '64fed393acec5_image2.jpg' (length=24)
 
-        foreach ($fileNames as $filename) {
-            $imgPathPublic = PATH_ROOT . '/public/images/estate_img/' . $filename;
+        $results = [];
+        for ($i = 0; $i < count($imageTmpPaths); $i++) {
+            $results[$imageTmpPaths[$i]] = $fileNames[$i];
+        }
+
+        //Now I can sipmly itterate and make at the same time two operations
+        //1 to insert into a database
+        //2 to relocate temp file on my webserver
+        foreach ($results as $key => $value) {
             $data = [
                 'estate_id' => $estate_id,
-                'photo_estate_path' => $filename
+                'photo_estate_path' => $value
             ];
             AppRepoManager::getRm()->getPhotoEstateRepo()->insertPhotoEstateRow($data);
+            $imgPathPublic = PATH_ROOT . '/public/images/estate_img/' . $value;
+            move_uploaded_file($key, $imgPathPublic);
         }
-        // var_dump($filename);
 
-        foreach ($imageTmpPaths as $imgTmpPath) {
-            move_uploaded_file($imgTmpPath, $imgPathPublic);
-        }
 
         // Here we stock our errors and redirect back
         if ($form_result->hasError()) {
