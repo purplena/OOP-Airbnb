@@ -21,6 +21,13 @@
             ];
         }
         ?>
+        <!-- Errors -->
+        <?php if ($form_result && $form_result->hasError()) : ?>
+            <div>
+                <?php echo $form_result->getErrors()[0]->getMessage(); ?>
+            </div>
+        <?php endif; ?>
+
         <form action="/addNewEstatePost" enctype="multipart/form-data" method="post">
             <input type="hidden" name="user_id" value=<?php echo $user->id; ?>>
             <div class="mt-5">

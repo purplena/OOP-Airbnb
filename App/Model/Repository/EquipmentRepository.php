@@ -7,13 +7,13 @@ use Core\Repository\Repository;
 
 class EquipmentRepository extends Repository
 {
- public function getTableName(): string
- {
-  return 'equipment';
- }
+    public function getTableName(): string
+    {
+        return 'equipment';
+    }
 
- public function findAllEquipment(): array
- {
-  return $this->readAll(Equipment::class);
- }
+    public function findAllEquipment(): array
+    {
+        return $this->readAll(Equipment::class);
+    }
 }

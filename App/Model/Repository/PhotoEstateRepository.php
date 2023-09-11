@@ -2,24 +2,23 @@
 
 namespace App\Model\Repository;
 
-
 use Core\Repository\Repository;
 
-class EstateEquipmentRepository extends Repository
+class PhotoEstateRepository extends Repository
 {
     public function getTableName(): string
     {
-        return 'estate_equipment';
+        return 'photo_estate';
     }
 
-    public function insertEstateEquipmentRow(array $data): bool
+    public function insertPhotoEstateRow(array $data): bool
     {
         $query = sprintf(
             '
             INSERT INTO `%s`
-            (`estate_id`, `equipment_id`) 
+            (`estate_id`, `photo_estate_path`) 
             VALUES 
-            (:estate_id, :equipment_id)',
+            (:estate_id, :photo_estate_path)',
             $this->getTableName()
         );
         $stmt = $this->pdo->prepare($query);

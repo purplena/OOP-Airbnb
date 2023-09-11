@@ -61,7 +61,6 @@ VALUES ('Wifi', 'Essentials'),
 ('Smoke alarm', 'Safety'),
 ('Carbon monoxide alarm', 'Safety');
 
-
 CREATE TABLE IF NOT EXISTS `estate` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `user_id` INT(11) NOT NULL,
@@ -78,6 +77,8 @@ CREATE TABLE IF NOT EXISTS `estate` (
   FOREIGN KEY (`type_estate_id`) REFERENCES `type_estate`(`id`),
   PRIMARY KEY (`id`)
 );
+
+alter table `estate` modify `allowed_animals` int(3);
 
 
 CREATE TABLE IF NOT EXISTS `photo_estate` (

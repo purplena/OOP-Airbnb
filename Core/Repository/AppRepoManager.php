@@ -3,6 +3,9 @@
 namespace Core\Repository;
 
 use App\Model\Repository\EquipmentRepository;
+use App\Model\Repository\EstateEquipmentRepository;
+use App\Model\Repository\EstateRepository;
+use App\Model\Repository\PhotoEstateRepository;
 use App\Model\Repository\TypeEstateRepository;
 use App\Model\Repository\UserRepository;
 use Core\App;
@@ -16,6 +19,9 @@ class AppRepoManager
     private UserRepository $userRepository;
     private TypeEstateRepository $typeEstate;
     private EquipmentRepository $equipment;
+    private PhotoEstateRepository $photoEstate;
+    private EstateEquipmentRepository $estateEquipment;
+    private EstateRepository $estate;
 
     //on déclare le constructeur
     protected function __construct()
@@ -24,6 +30,9 @@ class AppRepoManager
         $this->userRepository = new UserRepository($config);
         $this->typeEstate = new TypeEstateRepository($config);
         $this->equipment = new EquipmentRepository($config);
+        $this->photoEstate = new PhotoEstateRepository($config);
+        $this->estateEquipment = new EstateEquipmentRepository($config);
+        $this->estate = new EstateRepository($config);
     }
 
     public function getUserRepo(): UserRepository
@@ -39,5 +48,20 @@ class AppRepoManager
     public function getEquipmentRepo(): EquipmentRepository
     {
         return $this->equipment;
+    }
+
+    public function getPhotoEstateRepo(): PhotoEstateRepository
+    {
+        return $this->photoEstate;
+    }
+
+    public function getEstateEquipmentRepo(): EstateEquipmentRepository
+    {
+        return $this->estateEquipment;
+    }
+
+    public function getEstateRepo(): EstateRepository
+    {
+        return $this->estate;
     }
 }
