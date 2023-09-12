@@ -290,3 +290,15 @@ body {
 .bold-price {
   font-size: 20px;
 }
+
+.bottom-container {
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
+}
+
+#reservation-form {
+  max-width: 300px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
