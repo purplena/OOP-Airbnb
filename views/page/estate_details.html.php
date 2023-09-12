@@ -33,7 +33,6 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-            <!-- <div> -->
             <form action="/reservation" method="post" id="reservation-form">
                 <div class="mb-3">
                     <span>€ <span class="bold bold-price" id="price-span"><?php echo $estate->price; ?></span>/night</span>
@@ -81,7 +80,6 @@
                 </div>
                 <button type="submit" class="btn btn-custom">Reserve</button>
             </form>
-            <!-- </div> -->
         </div>
     </section>
 </div>

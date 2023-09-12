@@ -54,36 +54,14 @@ $(document).ready(function () {
   $('#date_finish').on('changeDate', function (e) {
     var startDateString = $('#date_start').datepicker('getDate');
     var endDateString = $('#date_finish').datepicker('getDate');
-
-    // Step 2: Convert the date strings to Date objects
     var startDate = new Date(startDateString);
     var endDate = new Date(endDateString);
-
-    // Step 3: Calculate the difference in milliseconds
     var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
-
-    // Step 4: Convert the difference to the number of nights
     var numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-    // Step 5: Display the number of nights
-    // $('#number_of_nights').text(numberOfNights + ' nights');
     document.getElementById('number_nights').innerText =
       numberOfNights + ' night(s)';
-
     var price = document.getElementById('price-span').innerText;
     var total = price * numberOfNights;
     document.getElementById('total').innerText = total + ' €';
   });
 });
-
-// console.log($('.datepicker').datepicker('getStartDate'));
-
-//Here all the treatment for reservation form
-// var reservDateStart = new Date(document.getElementById('date_start').value);
-
-// var reservDateStart = document.getElementById('date_start').innerText;
-// var reservDateFinish = document.getElementById('date_finish').innerText;
-// const inputNumNights = document.getElementById('number_nights');
-
-// console.log(reservDateStart);
-// console.log(reservDateFinish);
