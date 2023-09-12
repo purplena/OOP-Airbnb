@@ -71,4 +71,19 @@ class EstateRepository extends Repository
 
         return $arr_result;
     }
+
+    public function findEstateById(int $id): Estate
+    {
+        $estate = $this->readById(Estate::class, $id);
+        //Here I add to my models respective pictures of the estate by estate_id
+        $estate->photos = AppRepoManager::getRm()->getPhotoEstateRepo()->findAllPhotosByEstateId($id);
+        //Here I hydrate model Userby estate_id
+        $estate->user = AppRepoManager::getRm()->getUserRepo()->findUserById($estate->user_id);
+        //Here I hydrate model TypeEstate by estate_id
+        $estate->typeEstate = AppRepoManager::getRm()->getTypeEstateRepo()->findTypeEstateById($estate->type_estate_id);
+        //Here I hydrate model EstateEquipment and store all the equipment in the custom ptoperty of the model Estate that I cretaed myself equipment[]
+        $estate->equiment = AppRepoManager::getRm()->getEstateEquipmentRepo()->findEquipmentByEstateId($estate->id);
+
+        return $estate;
+    }
 }

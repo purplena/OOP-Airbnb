@@ -4,6 +4,7 @@ namespace Core;
 
 
 use App\Controller\AuthController;
+use App\Controller\EstateController;
 use App\Controller\PageController;
 use Core\Database\DatabaseConfigInterface;
 use MiladRahimi\PhpRouter\Exceptions\InvalidCallableException;
@@ -79,6 +80,8 @@ class App implements DatabaseConfigInterface
         //Page to add a new appartment
         $this->router->get('/airbnb-your-home', [PageController::class, 'addNewEstateView']);
         $this->router->post('/addNewEstatePost', [PageController::class, 'addNewEstatePost']);
+        //details of estate
+        $this->router->get('/details/{id}', [EstateController::class, 'detailsEstate']);
     }
 
     //3: methode startRouter (démarrage du router)

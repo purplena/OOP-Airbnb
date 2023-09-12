@@ -77,4 +77,9 @@ class UserRepository extends Repository
         $stmt->execute($data);
         return true;
     }
+
+    public function findUserById(int $id)
+    {
+        return $this->readById(User::class, $id);
+    }
 }

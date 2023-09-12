@@ -19,6 +19,7 @@ class Estate extends Model
     public int $allowed_animals;
 
     public array $photos;
+    public array $equiment;
 
 
     public ?User $user = null;

@@ -16,4 +16,9 @@ class TypeEstateRepository extends Repository
     {
         return $this->readAll(TypeEstate::class);
     }
+
+    public function findTypeEstateById(int $id)
+    {
+        return $this->readById(TypeEstate::class, $id);
+    }
 }
