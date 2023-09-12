@@ -11,25 +11,80 @@
             <img class="gallery__item gallery__item--3" src="/images/estate_img/<?php echo $estate->photos[0]; ?>" alt="">
             <img class="gallery__item gallery__item--4" src="/images/estate_img/<?php echo $estate->photos[3]; ?>" alt="">
             <img class="gallery__item gallery__item--5" src="/images/estate_img/<?php echo $estate->photos[4]; ?>" alt="">
-        </div class="bottom-container">
-        <div>
-            <h2 class="mt-5">Description</h2>
-            <p>Type of Estate: <?php echo $estate->typeEstate->label_estate; ?></p>
-            <p><i class="fa-solid fa-bed" style="color: #000000;"></i> <?php echo $estate->num_rooms; ?> rooms, <?php echo $estate->num_beds; ?> beds</p>
-            <p><?php echo $estate->description; ?></p>
+        </div>
+        <div class="bottom-container">
+            <div>
+                <h2 class="mt-5">Description</h2>
+                <p>Type of Estate: <?php echo $estate->typeEstate->label_estate; ?></p>
+                <p><i class="fa-solid fa-bed" style="color: #000000;"></i> <?php echo $estate->num_rooms; ?> rooms, <?php echo $estate->num_beds; ?> beds</p>
+                <p><i class="fa-solid fa-dog" style="color: #000000;"></i> & <i class="fa-solid fa-cat fa-flip-horizontal" style="color: #000000;"></i>: <?php echo ($estate->allowed_animals == 1) ? "Animals are allowed" : "Animals are not allowed"; ?></p>
+                <p><?php echo $estate->description; ?></p>
 
-            <div class="underline mt-5"></div>
+                <div class="underline mt-5"></div>
 
-            <h2 class="mt-5">What this place offers</h2>
-            <div class="equipment-container">
-                <?php foreach ($estate->equiment as $key => $value) : ?>
-                    <ol><strong><?php echo $key; ?></strong>
-                        <?php foreach ($value as $singleEquipment) : ?>
-                            <li><?php echo $singleEquipment['label_equipment']; ?></li>
-                        <?php endforeach; ?>
-                    </ol>
-                <?php endforeach; ?>
+                <h2 class="mt-5">What this place offers</h2>
+                <div class="equipment-container">
+                    <?php foreach ($estate->equiment as $key => $value) : ?>
+                        <ol><strong><?php echo $key; ?></strong>
+                            <?php foreach ($value as $singleEquipment) : ?>
+                                <li><?php echo $singleEquipment['label_equipment']; ?></li>
+                            <?php endforeach; ?>
+                        </ol>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div>
+                <form action="/reservation" method="post" id="reservation-form">
+                    <div class="mb-3">
+                        <span>€ <span class="bold bold-price" id="price-span"><?php echo $estate->price; ?></span>/night</span>
+                    </div>
+                    <div class="mb-3 form-group form-reservation-dates-container">
+                        <div>
+                            <label for="date_start">CHECK IN:</label>
+                            <input type="text" class="form-control datepicker" name="date_start" id="date_start">
+                        </div>
+                        <div>
+                            <label for="date_finish">CHECK OUT:</label>
+                            <input type="text" class="form-control datepicker" name="date_finish" id="date_finish">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" name="num_guests">
+                            <option selected>Guests</option>
+                            <?php for ($i = 1; $i <= intval($estate->num_beds); $i++) : ?>
+                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <?php endfor; ?>
+                        </select>
+                        <span class="form-text">Max <?php echo $estate->num_beds; ?> guests</span>
+                    </div>
+                    <div class="mb-3">
+                        <?php echo $estate->allowed_animals == 0 ? "<fieldset disabled>" : ""; ?>
+                        <select class="form-select" name="animals">
+                            <option selected>You come with an animal?</option>
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
+                        <?php echo $estate->allowed_animals == 0 ? "</fieldset>" : ""; ?>
 
+                        <?php if ($estate->allowed_animals == 1) : ?>
+                            <span class="form-text">You can come with you animal</span>
+                        <?php else : ?>
+                            <span class="form-text">Animals are not allowed</span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="underline mb-3"></div>
+                    <div class="mb-3">
+                        <label for="number_nights" class="form-label"># nights</label>
+                        <input type="number" name="number_nights" class="form-control" id="number_nights">
+                    </div>
+                    <div class="mb-3">
+                        <label for="total_price" class="form-label">TOTAL</label>
+                        <input type="number" name="total_price" class="form-control" id="total_price">
+                    </div>
+
+
+                    <button type="submit" class="btn btn-custom">Reserve</button>
+                </form>
             </div>
         </div>
 </div>

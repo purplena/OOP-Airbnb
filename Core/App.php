@@ -82,6 +82,8 @@ class App implements DatabaseConfigInterface
         $this->router->post('/addNewEstatePost', [PageController::class, 'addNewEstatePost']);
         //details of estate
         $this->router->get('/details/{id}', [EstateController::class, 'detailsEstate']);
+        //to see all estates that this user has 
+        $this->router->get('/myAirbnbs/{id}', [EstateController::class, 'estatesByUser']);
     }
 
     //3: methode startRouter (démarrage du router)

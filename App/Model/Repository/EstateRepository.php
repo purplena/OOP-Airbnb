@@ -86,4 +86,41 @@ class EstateRepository extends Repository
 
         return $estate;
     }
+
+    public function findAllEstatesByUserId(int $id)
+    { {
+
+            $arr_result = [];
+            $query = sprintf(
+                '
+            SELECT `%1$s`.*
+            FROM `%s`
+            WHERE `%1$s`.user_id = :id',
+                $this->getTableName()
+            );
+
+            $stmt = $this->pdo->prepare($query);
+            if (!$stmt) return null;
+            $stmt->execute(['id' => $id]);
+            $result = [];
+            while ($row_data = $stmt->fetch()) {
+                var_dump($row_data);
+                $result[] = $row_data;
+            }
+            var_dump($result);
+            die;
+
+
+            // $stmt = $this->pdo->query($query);
+            // if (!$stmt) return null;
+
+            // while ($row_data = $stmt->fetch()) {
+            //     $estate = new Estate($row_data);
+            //     $estate->photos = AppRepoManager::getRm()->getPhotoEstateRepo()->findAllPhotosByEstateId($row_data['id']);
+            //     $arr_result[] = $estate;
+            // }
+
+            return $arr_result;
+        }
+    }
 }

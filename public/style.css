@@ -266,3 +266,27 @@ body {
 .social-icon-container i {
   font-size: 2rem;
 }
+
+/* RESERVATION */
+#reservation-form {
+  background: #ffffff;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(187, 186, 186);
+  border-radius: 21px;
+  padding: 2.5rem;
+}
+
+#reservation-form label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.form-reservation-dates-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bold-price {
+  font-size: 20px;
+}
