@@ -15,10 +15,16 @@ class EstateController extends Controller
 {
     public function detailsEstate(int $id)
     {
+        $reservations = AppRepoManager::getRm()->getReservationRepo()->findReservationByEstateId($id);
+        $reservation_dates_by_estate_id = [];
+        foreach ($reservations as $reservation) {
+            $reservation_dates_by_estate_id[] = [$reservation->date_start, $reservation->date_finish];
+        }
         $view_data = [
             'title_tag' => 'Airbnb',
             'h1_tag' => 'Check this place',
             'estate' => AppRepoManager::getRm()->getEstateRepo()->findEstateById($id),
+            'reservations' => $reservation_dates_by_estate_id,
             'form_result' => Session::get(Session::FORM_RESULT),
         ];
 

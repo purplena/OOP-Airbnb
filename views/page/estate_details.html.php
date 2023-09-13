@@ -1,4 +1,3 @@
-<!-- <?php var_dump($estate->equiment); ?> -->
 <div class="page-container">
     <section>
         <h1><i class="bi bi-house"></i> This <strong><?php echo $estate->typeEstate->label_estate; ?></strong> is for you!</h1>
@@ -33,7 +32,7 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-            <form action="/reservationPost" method="post" id="reservation-form">
+            <form action="/reservationPost" method="post" id="reservation-form" data-unavailable-dates='<?php echo json_encode($reservations); ?>'>
                 <?php if ($form_result && $form_result->hasError()) : ?>
                     <div class="mb-3 p-2 text-danger border border-danger rounded-3" style="font-size: 12px;">
                         <?php echo $form_result->getErrors()[0]->getMessage(); ?>

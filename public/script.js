@@ -43,6 +43,48 @@ fetch('countries.json')
 
 document.getElementById('number_nights').innerText = '0 night(s)';
 
+var reservationForm = document.getElementById('reservation-form');
+var dataAttributeReservationForm = reservationForm.getAttribute(
+  'data-unavailable-dates'
+);
+console.log(dataAttributeReservationForm);
+
+function getDatesInRange(start, end) {
+  var dates = [];
+  var currentDate = new Date(start);
+  var lastDate = new Date(end);
+
+  while (currentDate <= lastDate) {
+    dates.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dates;
+}
+
+// var dateRanges = [
+//   ['2023-09-13', '2023-09-15'],
+//   ['2023-09-24', '2023-09-27'],
+//   ['2023-11-01', '2023-11-04'],
+// ];
+
+var dateRanges = JSON.parse(dataAttributeReservationForm).map(function (range) {
+  return [new Date(range[0]), new Date(range[1])];
+});
+
+console.log(dateRanges);
+var disabledDates = [];
+
+dateRanges.forEach(function (range) {
+  var dates = getDatesInRange(range[0], range[1]);
+  dates.forEach(function (date) {
+    disabledDates.push(
+      date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+    );
+  });
+});
+console.log(disabledDates);
+
 //Here I initialize y Bootstrap DatePicker Plugin
 // I block all the dates before today and I highlight today
 $(document).ready(function () {
@@ -50,6 +92,7 @@ $(document).ready(function () {
     format: 'dd/mm/yyyy',
     startDate: new Date(),
     todayHighlight: true,
+    datesDisabled: disabledDates,
   });
   $('#date_finish').on('changeDate', function (e) {
     var startDateString = $('#date_start').datepicker('getDate');
