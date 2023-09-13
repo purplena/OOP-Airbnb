@@ -100,3 +100,16 @@ CREATE TABLE IF NOT EXISTS `estate_equipment` (
   PRIMARY KEY (`id`)
 );
 
+
+CREATE TABLE IF NOT EXISTS `reservation` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `estate_id` INT(11) NOT NULL,
+  `date_start` DATE NOT NULL,
+  `date_finish` DATE NOT NULL,
+  `num_guests` INT(11) NOT NULL,
+  `are_animals` INT(3) NOT NULL,
+  FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
+  FOREIGN KEY (`estate_id`) REFERENCES `estate`(`id`),
+  PRIMARY KEY (`id`)
+);

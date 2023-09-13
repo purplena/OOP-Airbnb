@@ -1,8 +1,7 @@
 <div class="page-container">
 
     <section>
-        <h1><?php echo $h1_tag; ?></h1>
-        <h2>Ready to Airbnb?</h2>
+        <h1>Ready to Airbnb?</h1>
         <?php
 
         use Core\Session\Session;
@@ -93,7 +92,7 @@
                 <?php endforeach; ?>
             </div>
             <div class="mt-3">
-                <input type="submit" name="submit_form" value="Submit" class="btn btn-primary">
+                <input type="submit" name="submit_form" value="Submit" class="btn btn-custom">
             </div>
         </form>
     </section>

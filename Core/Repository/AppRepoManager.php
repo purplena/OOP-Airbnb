@@ -6,6 +6,7 @@ use App\Model\Repository\EquipmentRepository;
 use App\Model\Repository\EstateEquipmentRepository;
 use App\Model\Repository\EstateRepository;
 use App\Model\Repository\PhotoEstateRepository;
+use App\Model\Repository\ReservationRepository;
 use App\Model\Repository\TypeEstateRepository;
 use App\Model\Repository\UserRepository;
 use Core\App;
@@ -22,6 +23,7 @@ class AppRepoManager
     private PhotoEstateRepository $photoEstate;
     private EstateEquipmentRepository $estateEquipment;
     private EstateRepository $estate;
+    private ReservationRepository $reservation;
 
     //on déclare le constructeur
     protected function __construct()
@@ -33,6 +35,7 @@ class AppRepoManager
         $this->photoEstate = new PhotoEstateRepository($config);
         $this->estateEquipment = new EstateEquipmentRepository($config);
         $this->estate = new EstateRepository($config);
+        $this->reservation = new ReservationRepository($config);
     }
 
     public function getUserRepo(): UserRepository
@@ -63,5 +66,10 @@ class AppRepoManager
     public function getEstateRepo(): EstateRepository
     {
         return $this->estate;
+    }
+
+    public function getReservationRepo(): ReservationRepository
+    {
+        return $this->reservation;
     }
 }

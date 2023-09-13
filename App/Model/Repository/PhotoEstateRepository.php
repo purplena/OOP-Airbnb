@@ -2,9 +2,6 @@
 
 namespace App\Model\Repository;
 
-use App\Model\Estate;
-use App\Model\PhotoEstate;
-use Core\Repository\AppRepoManager;
 use Core\Repository\Repository;
 
 class PhotoEstateRepository extends Repository

@@ -21,6 +21,9 @@ class Estate extends Model
     public array $photos;
     public array $equiment;
 
+    public array $reservations;
+
+
 
     public ?User $user = null;
     public ?TypeEstate $typeEstate = null;

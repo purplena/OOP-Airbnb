@@ -4,6 +4,7 @@ namespace App\Model\Repository;
 
 use App\Model\Estate;
 use App\Model\PhotoEstate;
+use App\Model\Reservation;
 use Core\Repository\AppRepoManager;
 use Core\Repository\Repository;
 
@@ -88,39 +89,29 @@ class EstateRepository extends Repository
     }
 
     public function findAllEstatesByUserId(int $id)
-    { {
-
-            $arr_result = [];
-            $query = sprintf(
-                '
+    {
+        $query = sprintf(
+            '
             SELECT `%1$s`.*
             FROM `%s`
             WHERE `%1$s`.user_id = :id',
-                $this->getTableName()
-            );
+            $this->getTableName()
+        );
 
-            $stmt = $this->pdo->prepare($query);
-            if (!$stmt) return null;
-            $stmt->execute(['id' => $id]);
-            $result = [];
-            while ($row_data = $stmt->fetch()) {
-                var_dump($row_data);
-                $result[] = $row_data;
-            }
-            var_dump($result);
-            die;
-
-
-            // $stmt = $this->pdo->query($query);
-            // if (!$stmt) return null;
-
-            // while ($row_data = $stmt->fetch()) {
-            //     $estate = new Estate($row_data);
-            //     $estate->photos = AppRepoManager::getRm()->getPhotoEstateRepo()->findAllPhotosByEstateId($row_data['id']);
-            //     $arr_result[] = $estate;
-            // }
-
-            return $arr_result;
+        $stmt = $this->pdo->prepare($query);
+        if (!$stmt) return null;
+        $stmt->execute(['id' => $id]);
+        $result = [];
+        while ($row_data = $stmt->fetch()) {
+            // var_dump($row_data);
+            $estate = new Estate($row_data);
+            $reservations = AppRepoManager::getRm()->getReservationRepo()->findReservationByEstateId($row_data['id']);
+            $estate->reservations = $reservations;
+            $estate->photos = AppRepoManager::getRm()->getPhotoEstateRepo()->findAllPhotosByEstateId($row_data['id']);
+            $estate->equiment = AppRepoManager::getRm()->getEstateEquipmentRepo()->findEquipmentByEstateId($row_data['id']);
+            $result[] = $estate;
         }
+
+        return $result;
     }
 }

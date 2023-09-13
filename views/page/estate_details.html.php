@@ -33,7 +33,13 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-            <form action="/reservation" method="post" id="reservation-form">
+            <form action="/reservationPost" method="post" id="reservation-form">
+                <?php if ($form_result && $form_result->hasError()) : ?>
+                    <div class="mb-3 p-2 text-danger border border-danger rounded-3" style="font-size: 12px;">
+                        <?php echo $form_result->getErrors()[0]->getMessage(); ?>
+                    </div>
+                <?php endif; ?>
+                <input type="hidden" name="estate_id" value=<?php echo $estate->id; ?>>
                 <div class="mb-3">
                     <span>€ <span class="bold bold-price" id="price-span"><?php echo $estate->price; ?></span>/night</span>
                 </div>
@@ -58,7 +64,7 @@
                 </div>
                 <div class="mb-3">
                     <?php echo $estate->allowed_animals == 0 ? "<fieldset disabled>" : ""; ?>
-                    <select class="form-select" name="animals">
+                    <select class="form-select" name="are_animals">
                         <option selected>You come with an animal?</option>
                         <option value="1">YES</option>
                         <option value="0">NO</option>

@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use Core\Controller\Controller;
+use Core\Form\FormError;
+use Core\Form\FormResult;
 use Core\Repository\AppRepoManager;
 use Core\Session\Session;
 use Core\View\View;
+use DateTime;
+use Laminas\Diactoros\ServerRequest;
 
 class EstateController extends Controller
 {
@@ -26,9 +30,8 @@ class EstateController extends Controller
     {
         $view_data = [
             'title_tag' => 'Airbnb',
-            'h1_tag' => 'Check this place',
+            'h1_tag' => 'Check all your Airbnbs',
             'estates' => AppRepoManager::getRm()->getEstateRepo()->findAllEstatesByUserId($id),
-            'form_result' => Session::get(Session::FORM_RESULT),
         ];
 
         $view = new View('page/all_estates_by_user');

@@ -73,6 +73,32 @@ body {
   color: var(--background-main);
 }
 
+.btn-custom-border {
+  background: none;
+  color: var(--pink-main);
+  border: 1px solid var(--pink-main);
+  padding: 0.25rem;
+  font-size: 12px;
+}
+
+.btn-custom-border:hover {
+  background: var(--pink-accent);
+  color: var(--background-main);
+  border: 1px solid var(--pink-accent);
+}
+
+.btn-delete {
+  background: none;
+  color: var(--pink-main);
+  border: 1px solid var(--pink-main);
+}
+
+.btn-delete:hover {
+  background: var(--pink-accent);
+  color: var(--background-main);
+  border: 1px solid var(--pink-accent);
+}
+
 /* _____________________________NAVBAR__________________________________ */
 
 #navbar {
@@ -302,3 +328,52 @@ body {
   flex-shrink: 0;
   align-self: flex-start;
 }
+
+/* RESERVATIONS */
+.reservation-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.reservation-container {
+  width: 450px;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border: 1px var(--pink-main) solid;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.reservation-photo-container {
+  align-self: flex-start;
+  text-align: center;
+}
+
+.reservation-photo {
+  width: 150px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.your-trip-container p,
+.your-estate-container p,
+.your-host-container p {
+  margin-bottom: 0;
+}
+.your-trip-container,
+.your-estate-container,
+.your-host-container {
+  margin-bottom: 1rem;
+}
+
+.reservation-h2 {
+  font-size: 15px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+/* ESTATES OF A USER */

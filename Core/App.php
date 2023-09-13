@@ -6,6 +6,7 @@ namespace Core;
 use App\Controller\AuthController;
 use App\Controller\EstateController;
 use App\Controller\PageController;
+use App\Controller\ReservationController;
 use Core\Database\DatabaseConfigInterface;
 use MiladRahimi\PhpRouter\Exceptions\InvalidCallableException;
 use MiladRahimi\PhpRouter\Exceptions\RouteNotFoundException;
@@ -82,8 +83,12 @@ class App implements DatabaseConfigInterface
         $this->router->post('/addNewEstatePost', [PageController::class, 'addNewEstatePost']);
         //details of estate
         $this->router->get('/details/{id}', [EstateController::class, 'detailsEstate']);
+        //Route to make reservation
+        $this->router->post('/reservationPost', [ReservationController::class, 'addNewReservationPost']);
         //to see all estates that this user has 
         $this->router->get('/myAirbnbs/{id}', [EstateController::class, 'estatesByUser']);
+        //route to see all reservations
+        $this->router->get('/trips/{id}', [ReservationController::class, 'reservationsByUser']);
     }
 
     //3: methode startRouter (démarrage du router)
