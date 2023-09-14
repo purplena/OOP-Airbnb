@@ -47,22 +47,6 @@ const favoiteBtn = document.getElementsByClassName('add-favorite-button');
 $('.add-favorite-button').click(function () {
   var estateId = $(this).data('estate-id');
   var button = $(this);
-
-  // $.ajax({
-  //   url: '/addToFavorites',
-  //   type: 'POST',
-  //   data: {
-  //     estate_id: estateId,
-  //   },
-  //   dataType: 'json',
-  //   success: function (response) {
-  //     if (response.status === 'success') {
-  //       button.css('color', '#ff385c');
-  //     } else {
-  //       alert(response.message); // Show error message or take other action
-  //     }
-  //   },
-  // });
   if (button.hasClass('favorite')) {
     $.ajax({
       url: '/deleteFavoriteByUser',

@@ -11,6 +11,7 @@ class Favorites extends Model
 {
     public int $user_id;
     public int $estate_id;
+    public array $photos;
     public ?User $user = null;
     public ?Estate $estate = null;
 }

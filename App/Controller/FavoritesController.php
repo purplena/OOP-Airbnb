@@ -32,4 +32,15 @@ class FavoritesController extends Controller
 
         AppRepoManager::getRm()->getFavoritesRepo()->deleteFavorite($user_id, $estate_id);
     }
+
+    public function seeAllFavoritesByUser(int $id)
+    {
+        $view_data = [
+            'title_tag' => 'Airbnb',
+            'h1_tag' => 'Home page',
+            'favorites' => AppRepoManager::getRm()->getFavoritesRepo()->findFavoriteByUserIdWithModels($id),
+        ];
+        $view = new View('page/wishlist');
+        $view->render($view_data);
+    }
 }

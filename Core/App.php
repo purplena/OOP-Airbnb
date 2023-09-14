@@ -96,6 +96,8 @@ class App implements DatabaseConfigInterface
         $this->router->post('/addToFavorites', [FavoritesController::class, 'addEstateToFavorites']);
         //route to delete a favorite
         $this->router->post('/deleteFavoriteByUser', [FavoritesController::class, 'deleteFavoriteByUser']);
+        //route to see wishlist
+        $this->router->get('/wishlist/{id}', [FavoritesController::class, 'seeAllFavoritesByUser']);
     }
 
     //3: methode startRouter (démarrage du router)

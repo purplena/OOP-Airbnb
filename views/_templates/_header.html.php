@@ -43,7 +43,7 @@ use Core\Session\Session; ?>
             <div id="menu-items-container" class="shadow bg-body-tertiary rounded">
                 <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/trips/' . Session::get(Session::USER)->id . '">Trips</a></li>' : ""; ?>
                 <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/myAirbnbs/' . Session::get(Session::USER)->id . '">My Airbnbs</a></li>' : ""; ?>
-                <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/wishlist">Wishlist</a></li>' : ""; ?>
+                <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/wishlist/' . Session::get(Session::USER)->id . '">Wishlist</a></li>' : ""; ?>
                 <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/airbnb-your-home"><i class="bi bi-house-heart"></i> Airbnb your home</a></li>' : ""; ?>
                 <?php echo $auth::isAuth() ? '<li class="menu-item"><a class="menu-link" href="/logout">Log Out</a></li>' : ""; ?>
                 <?php echo $auth::isAuth() ? "" : '<li class="menu-item" id="login-button"><a class="menu-link" href="/login">Log in</a></li>'; ?>
