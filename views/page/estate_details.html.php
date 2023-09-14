@@ -32,7 +32,7 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-            <form action="/reservationPost" method="post" id="reservation-form" data-unavailable-dates='<?php echo json_encode($reservations); ?>'>
+            <form action="/reservationPost#reservation-form" method="post" id="reservation-form" data-unavailable-dates='<?php echo json_encode($reservations); ?>'>
                 <?php if ($form_result && $form_result->hasError()) : ?>
                     <div class="mb-3 p-2 text-danger border border-danger rounded-3" style="font-size: 12px;">
                         <?php echo $form_result->getErrors()[0]->getMessage(); ?>
@@ -45,11 +45,11 @@
                 <div class="mb-3 form-group form-reservation-dates-container">
                     <div>
                         <label for="date_start">CHECK IN:</label>
-                        <input type="text" class="form-control datepicker" name="date_start" id="date_start">
+                        <input type="text" class="form-control datepicker" name="date_start" id="date_start" autocomplete="off">
                     </div>
                     <div>
                         <label for="date_finish">CHECK OUT:</label>
-                        <input type="text" class="form-control datepicker" name="date_finish" id="date_finish">
+                        <input type="text" class="form-control datepicker" name="date_finish" id="date_finish" autocomplete="off">
                     </div>
                 </div>
                 <div class="mb-3">

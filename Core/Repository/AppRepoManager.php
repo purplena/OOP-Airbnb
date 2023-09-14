@@ -5,6 +5,7 @@ namespace Core\Repository;
 use App\Model\Repository\EquipmentRepository;
 use App\Model\Repository\EstateEquipmentRepository;
 use App\Model\Repository\EstateRepository;
+use App\Model\Repository\FavoritesRepository;
 use App\Model\Repository\PhotoEstateRepository;
 use App\Model\Repository\ReservationRepository;
 use App\Model\Repository\TypeEstateRepository;
@@ -24,6 +25,7 @@ class AppRepoManager
     private EstateEquipmentRepository $estateEquipment;
     private EstateRepository $estate;
     private ReservationRepository $reservation;
+    private FavoritesRepository $favorite;
 
     //on déclare le constructeur
     protected function __construct()
@@ -33,6 +35,7 @@ class AppRepoManager
         $this->typeEstate = new TypeEstateRepository($config);
         $this->equipment = new EquipmentRepository($config);
         $this->photoEstate = new PhotoEstateRepository($config);
+        $this->favorite = new FavoritesRepository($config);
         $this->estateEquipment = new EstateEquipmentRepository($config);
         $this->estate = new EstateRepository($config);
         $this->reservation = new ReservationRepository($config);
@@ -71,5 +74,10 @@ class AppRepoManager
     public function getReservationRepo(): ReservationRepository
     {
         return $this->reservation;
+    }
+
+    public function getFavoritesRepo(): FavoritesRepository
+    {
+        return $this->favorite;
     }
 }

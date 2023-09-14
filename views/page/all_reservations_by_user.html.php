@@ -37,7 +37,7 @@
                             <p>Email: <?php echo $reservation->host['email']; ?></p>
                         </div>
 
-                        <a class="btn btn-delete" href="/deleteReservation/<?php echo $reservation->id ?>">Delete reservation</a>
+                        <a class="btn btn-delete" href="/trips/deleteReservation/<?php echo $reservation->id ?>">Delete reservation</a>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -45,6 +45,8 @@
     <?php else : ?>
         <div>
             <h2>You have no reservations yet! Sorry ...</h2>
+            <p>You can start planning your next trip now</p>
+            <a href="/" class="btn btn-custom">Our Airbnbs</a>
         </div>
     <?php endif ?>
 </div>

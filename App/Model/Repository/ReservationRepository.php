@@ -93,4 +93,35 @@ class ReservationRepository extends Repository
 
         return $result_array;
     }
+
+    public function deleteReservationById(int $id)
+    {
+        return $this->deleteById($id);
+    }
+
+    public function checkReservation($date_start, $date_finish, $estate_id): ?array
+    {
+
+        $query = sprintf(
+            "
+            SELECT *
+            FROM `%s`
+            WHERE ((date_start >= :date_start) AND (date_finish <= :date_finish))
+            AND estate_id = :estate_id",
+            $this->getTableName()
+        );
+        $stmt = $this->pdo->prepare($query);
+        if (!$stmt) return null;
+        $stmt->execute([
+            'date_start' => $date_start,
+            'date_finish' => $date_finish,
+            'estate_id' => $estate_id
+        ]);
+        $result_array = [];
+        while ($row_data = $stmt->fetch()) {
+            $result_array[] = $row_data;
+        }
+
+        return $result_array;
+    }
 }

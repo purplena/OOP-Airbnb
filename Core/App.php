@@ -5,6 +5,7 @@ namespace Core;
 
 use App\Controller\AuthController;
 use App\Controller\EstateController;
+use App\Controller\FavoritesController;
 use App\Controller\PageController;
 use App\Controller\ReservationController;
 use Core\Database\DatabaseConfigInterface;
@@ -89,6 +90,12 @@ class App implements DatabaseConfigInterface
         $this->router->get('/myAirbnbs/{id}', [EstateController::class, 'estatesByUser']);
         //route to see all reservations
         $this->router->get('/trips/{id}', [ReservationController::class, 'reservationsByUser']);
+        //route to delete a reservation
+        $this->router->get('/trips/deleteReservation/{id}', [ReservationController::class, 'deleteReservation']);
+        //Route to add estate to favorites
+        $this->router->post('/addToFavorites', [FavoritesController::class, 'addEstateToFavorites']);
+        //route to delete a favorite
+        $this->router->post('/deleteFavoriteByUser', [FavoritesController::class, 'deleteFavoriteByUser']);
     }
 
     //3: methode startRouter (démarrage du router)

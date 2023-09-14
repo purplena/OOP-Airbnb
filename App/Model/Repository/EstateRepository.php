@@ -3,8 +3,6 @@
 namespace App\Model\Repository;
 
 use App\Model\Estate;
-use App\Model\PhotoEstate;
-use App\Model\Reservation;
 use Core\Repository\AppRepoManager;
 use Core\Repository\Repository;
 
@@ -114,27 +112,4 @@ class EstateRepository extends Repository
 
         return $result;
     }
-
-    // public function findReservationByEstateId(int $id): ?array
-    // {
-    //     $query = sprintf(
-    //         '
-    //         SELECT `%1$s`.*
-    //         FROM `%1$s`
-    //         WHERE `%1$s`.estate_id = :id',
-    //         AppRepoManager::getRm()->getReservationRepo()->getTableName()
-    //     );
-    //     $stmt = $this->pdo->prepare($query);
-    //     if (!$stmt) return null;
-    //     $stmt->execute(['id' => $id]);
-    //     $result_array = [];
-
-    //     while ($row_data = $stmt->fetch()) {
-    //         var_dump($row_data);
-    //         $reservation = new Reservation($row_data);
-    //         $result_array[] = $reservation;
-    //     }
-
-    //     return $result_array;
-    // }
 }

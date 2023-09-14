@@ -9,16 +9,22 @@ use Core\Repository\AppRepoManager;
 use Core\Session\Session;
 use Core\View\View;
 use Laminas\Diactoros\ServerRequest;
-use Laminas\Diactoros\UploadedFile;
 
 class PageController extends Controller
 {
     public function index()
     {
+        if (Session::get(Session::USER)) {
+            $favorites = AppRepoManager::getRm()->getFavoritesRepo()->findFavoriteByUserId(Session::get(Session::USER)->id);
+        } else {
+            $favorites = null;
+        }
+
         $view_data = [
             'title_tag' => 'Airbnb',
             'h1_tag' => 'Home page',
-            'estates' => AppRepoManager::getRm()->getEstateRepo()->findAllEstates()
+            'estates' => AppRepoManager::getRm()->getEstateRepo()->findAllEstates(),
+            'favorites' => $favorites
         ];
         $view = new View('page/home');
         $view->render($view_data);
