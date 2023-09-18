@@ -17,7 +17,7 @@ class ReservationController extends Controller
     {
         $post_data = $request->getParsedBody();
         $form_result = new FormResult();
-        $user_id = Session::get(Session::USER)->id;
+
         $date_start = DateTime::createFromFormat('d/m/Y', $post_data['date_start'])->format('Y-m-d');
         $date_finish = DateTime::createFromFormat('d/m/Y', $post_data['date_finish'])->format('Y-m-d');
         //Here I check the reservations according to the dates
@@ -31,6 +31,8 @@ class ReservationController extends Controller
             empty($post_data['num_guests'])
         ) {
             $form_result->addError(new FormError('Please fill in all the data'));
+        } else if (!(Session::get(Session::USER))) {
+            $form_result->addError(new FormError('Please log in first!'));
         } else if ($date_finish <= $date_start) {
             $form_result->addError(new FormError('Oops! Your dates are not correct'));
         } else if ($reservatons) {
@@ -38,7 +40,7 @@ class ReservationController extends Controller
             $form_result->addError(new FormError('Check other dates! Sorry...'));
         } else {
             $estate_id = intval($post_data['estate_id']);
-            $user_id = intval($user_id);
+            $user_id = intval(Session::get(Session::USER)->id);
             $num_guests = intval($post_data['num_guests']);
             if (empty($post_data['are_animals'])) {
                 $are_animals = 0;

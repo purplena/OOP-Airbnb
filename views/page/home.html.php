@@ -1,7 +1,17 @@
-<?php
-
-use Core\Session\Session; ?>
 <div class="page-container">
+    <div data-tor-slider>
+        <div class="tor-slider-wrapper">
+            <div class="tor-slider-wrapper">
+                <div class="h-15rem bg-navy"></div>
+            </div>
+            <div class="tor-slider-wrapper">
+                <div class="h-15rem bg-magenta"></div>
+            </div>
+            <div class="tor-slider-wrapper">
+                <div class="h-15rem bg-primary"></div>
+            </div>
+        </div>
+    </div>
     <section class="home-section-container">
         <?php ?>
         <?php foreach ($estates as $estate) : ?>

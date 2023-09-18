@@ -159,8 +159,8 @@ body {
   text-align: left;
   border-radius: 21px;
   position: absolute;
-  top: 60px;
-  right: 40px;
+  top: 77px;
+  right: 63px;
   display: none;
   z-index: 10;
 }
@@ -210,6 +210,10 @@ body {
 .card-custom {
   border: transparent;
   position: relative;
+}
+
+.card-title {
+  margin-bottom: 3px;
 }
 
 .add-favorite-button {

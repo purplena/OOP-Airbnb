@@ -46,46 +46,35 @@ const favoiteBtn = document.getElementsByClassName('add-favorite-button');
 
 $('.add-favorite-button').click(function () {
   var estateId = $(this).data('estate-id');
+  var action = $(this).hasClass('favorite') ? 'delete' : 'add';
   var button = $(this);
-  if (button.hasClass('favorite')) {
-    $.ajax({
-      url: '/deleteFavoriteByUser',
-      type: 'POST',
-      data: {
-        estate_id: estateId,
-      },
-      dataType: 'json',
-      success: function (response) {
-        if (response.status === 'success') {
-          button.removeClass('favorite');
-          button.css('color', '#ffffff');
-          button.addClass('fa-regular');
-          button.removeClass('fa-solid');
-        } else {
-          alert(response.message);
-        }
-      },
-    });
-  } else {
-    $.ajax({
-      url: '/addToFavorites',
-      type: 'POST',
-      data: {
-        estate_id: estateId,
-      },
-      dataType: 'json',
-      success: function (response) {
-        if (response.status === 'success') {
+
+  $.ajax({
+    url: '/manageFavoritesByUser',
+    type: 'POST',
+    data: {
+      estate_id: estateId,
+      action: action,
+    },
+    dataType: 'json',
+    success: function (response) {
+      if (response.status === 'success') {
+        if (action === 'add') {
           button.addClass('favorite');
           button.removeClass('fa-regular');
           button.addClass('fa-solid');
           button.css('color', '#ff385c');
         } else {
-          alert(response.message);
+          button.removeClass('favorite');
+          button.css('color', '#ffffff');
+          button.addClass('fa-regular');
+          button.removeClass('fa-solid');
         }
-      },
-    });
-  }
+      } else {
+        alert(response.message);
+      }
+    },
+  });
 });
 
 document.getElementById('number_nights').innerText = '0 night(s)';

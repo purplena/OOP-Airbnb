@@ -92,12 +92,12 @@ class App implements DatabaseConfigInterface
         $this->router->get('/trips/{id}', [ReservationController::class, 'reservationsByUser']);
         //route to delete a reservation
         $this->router->get('/trips/deleteReservation/{id}', [ReservationController::class, 'deleteReservation']);
-        //Route to add estate to favorites
-        $this->router->post('/addToFavorites', [FavoritesController::class, 'addEstateToFavorites']);
-        //route to delete a favorite
-        $this->router->post('/deleteFavoriteByUser', [FavoritesController::class, 'deleteFavoriteByUser']);
+        //route to manage favorites (toggle) 
+        $this->router->post('/manageFavoritesByUser', [FavoritesController::class, 'manageFavoritesByUser']);
         //route to see wishlist
         $this->router->get('/wishlist/{id}', [FavoritesController::class, 'seeAllFavoritesByUser']);
+        //route to delete from wishlist
+        $this->router->get('/wishlist/deleteFromFavorites/{id}', [FavoritesController::class, 'deleteFromFavorites']);
     }
 
     //3: methode startRouter (démarrage du router)

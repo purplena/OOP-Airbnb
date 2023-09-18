@@ -49,10 +49,6 @@ class FavoritesRepository extends Repository
         );
         $stmt = $this->pdo->prepare($query);
         if (!$stmt) return null;
-        // $stmt->execute([
-        //     'user_id' => $user_id,
-        //     'estate_id' => $estate_id
-        // ]);
 
         if ($stmt->execute([
             'user_id' => $user_id,
@@ -123,5 +119,23 @@ class FavoritesRepository extends Repository
         }
 
         return $result_array;
+    }
+
+    public function deleteFavoriteByFavoriteId(int $id)
+    {
+        $query = sprintf(
+            '
+            DELETE FROM %s 
+            WHERE id = :id',
+            $this->getTableName()
+        );
+        $stmt = $this->pdo->prepare($query);
+        if (!$stmt) return null;
+
+        if ($stmt->execute([
+            'id' => $id
+        ]))
+
+            return true;
     }
 }
